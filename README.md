@@ -1,75 +1,77 @@
-# React + TypeScript + Vite
+# Movie Search
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + TypeScript movie search app for the GoIT Full Stack course. It queries [The Movie Database (TMDB)](https://www.themoviedb.org/) and shows matching titles in a grid. Selecting a title opens a details modal.
 
-Currently, two official plugins are available:
+Repository: [groteskzp/03-react-movies](https://github.com/groteskzp/03-react-movies)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Live Demo
 
-## React Compiler
+[https://03-react-movies-bay-theta-82.vercel.app](https://03-react-movies-bay-theta-82.vercel.app)
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Features
 
-Note: This will impact Vite dev & build performances.
+- Search movies by keyword through the TMDB Search Movies API
+- Toast if the search field is empty
+- Toast if the request succeeds but returns no movies
+- Loading text while the request is in progress
+- Error message if the request fails
+- Poster grid with a fallback when a movie has no poster
+- Details modal with backdrop (or poster), title, overview, release date, and rating
+- Close the modal with the close button, backdrop click, or <kbd>Escape</kbd>
+- Page scroll is locked while the modal is open
+- TMDB attribution link in the header
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 19** + **TypeScript**
+- **Vite 8** (React plugin and React Compiler)
+- **axios** for HTTP requests
+- **react-hot-toast** for notifications
+- **modern-normalize** for CSS reset
+- **CSS Modules** for component styles
+- **ESLint** with TypeScript and React Hooks rules
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Source layout:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+  components/   App, SearchBar, MovieGrid, MovieModal, Loader, ErrorMessage
+  services/     TMDB search client
+  types/        Movie type
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+**Requirements:** Node.js and npm.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Clone the repository and install dependencies:
+
+   ```bash
+   git clone https://github.com/groteskzp/03-react-movies.git
+   cd 03-react-movies
+   npm install
+   ```
+
+2. Create a `.env` file in the project root and add a TMDB **API Read Access Token** (Bearer token from the TMDB account settings):
+
+   ```
+   VITE_TMDB_TOKEN=
+   ```
+
+   
+Vite exposes only variables prefixed with `VITE_`. Do not commit `.env` files.
+
+3. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+## Scripts
+
+| Script | Description |
+| --- | --- |
+| `npm run dev` | Start the Vite development server |
+| `npm run build` | Type-check and build the production bundle |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint |
